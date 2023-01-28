@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="sticky flex flex-row justify-between p-4">
+        <h1 class="font-bold text-3xl">Forum</h1>
+        <a [routerLink]="['./add']" class="fixed right-6 bottom-20 bg-brown p-3 rounded-full shadow-md transition ease-in-out duration-200 hover:scale-105 active:scale-95">
+            <hero-icon name="plus" type="outline" class="w-6 h-6 text-white"></hero-icon>
+        </a>
+    </div>
+    <div class="flex flex-col space-y-2 divide-y divide-gray-300">
+        <a *ngFor="let forum of forums" [routerLink]="['./detail/',forum.id]" class="w-full flex flex-col space-y-3 p-4 bg-white tracking-wide hover:shadow-lg focus:bg-gray-100">
+            <div class="flex flex-row items-center justify-start space-x-2">
+                <img [src]="forum.author.profileImg | img" alt="Profile Image" class="object-cover w-12 h-12 rounded-full">
+                <div class="flex flex-col">
+                    <span class="font-medium text-sm">{{forum.author.fullname}}</span>
+                    <span class="text-xs text-gray-400"> {{forum.author.username}}</span>
+                </div>
+            </div>
+            <div class="flex flex-col space-y-1">
+                <span class="font-medium text-lg">{{forum.title}}</span>
+                <div class="text-sm text-justify">{{forum.body}}</div>
+            </div>
+            <div class="flex flex-col space-y-2">
+                <div *ngIf="forum.thumbnail">
+                    <img [src]="forum.thumbnail | img" alt="Forum Thumbnail" class="w-full h-full rounded-lg">
+                </div>
+                <span class="font-medium text-xs text-gray-400">{{forum.createdAt | date:'d MMM y, h:mm a'}}</span>
+            </div>
+        </a>
+        <ng-container *ngFor="let i of [0,1,2,3]">
+            <div *ngIf="loading" class="w-full h-40 bg-gray-200 animate-pulse"></div>
+        </ng-container>
+        <ng-container *ngIf="!loading && forums.length == 0">
+            <div class="w-full h-96 flex items-center justify-center p-8">
+                <span class="text-sm text-gray-400">No threads yet</span>
+            </div>
+        </ng-container>
+    </div>
+</div>

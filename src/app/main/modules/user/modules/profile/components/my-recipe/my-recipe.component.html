@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="flex flex-col space-y-4 p-4">
+        <a *ngFor="let recipe of recipes" [routerLink]="['../../recipe/detail/',recipe.id]" class="grid grid-cols-5 items-center shadow-md rounded-lg bg-white tracking-wide hover:shadow-lg focus:scale-95 sm:grid-cols-7">
+            <div class="col-span-1 p-2">
+                <img [src]="recipe.thumbnail | img" alt="recipe Thumbnail" class="object-cover aspect-square rounded-lg">
+            </div>
+            <div class="col-span-3 p-2 sm:col-span-5">
+                <div class="flex flex-col justify-between space-y-1">
+                    <span class="font-medium text-sm sm:text-base">{{recipe.title}}</span>
+                    <span class="text-xs sm:text-sm">{{recipe.category.name}}</span>
+                </div>
+            </div>
+            <div class="col-span-1 p-2">
+                <div class="w-full inline-flex items-center justify-center space-x-1">
+                    <hero-icon name="star" type="solid" class="w-5 h-5 text-yellow-400 fill-yellow-400"></hero-icon>
+                    <span class="text-sm sm:text-base">{{recipe.rating ?? '0'}}</span>
+                </div>
+            </div>
+        </a>
+        <ng-container *ngFor="let i of [0,1,2,3]">
+            <div *ngIf="loading" class="w-full h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+        </ng-container>
+    </div>
+    <ng-container *ngIf="!loading && recipes.length == 0">
+        <div class="w-full h-64 flex items-center justify-center">
+            <span class="text-sm text-gray-400">You have not created any recipes yet</span>
+        </div>
+    </ng-container>
+</div>

@@ -1,0 +1,35 @@
+<app-back-navigation label="Course" link="./course"></app-back-navigation>
+<div class="container tracking-wide">
+    <div *ngIf="course" class="relative w-full h-40 overflow-clip shadow-md before:content-[''] before:absolute before:z-10 before:w-full before:h-full before:bg-black/40">
+        <img [src]="course.thumbnail | img" alt="Course Thumbnail" class="absolute object-cover w-full h-full">
+        <div class="absolute z-20 w-full h-full flex px-6 py-7 text-white">
+            <div class="w-full flex flex-col justify-between">
+                <div class="w-full flex flex-row justify-between">
+                    <div>
+                        <h3 class="font-medium text-lg">{{course.title}}</h3>
+                        <div class="flex items-center space-x-1 text-sm">
+                            <hero-icon name="book-open" type="outline" class="w-5 h-5 text-inherit"></hero-icon>
+                            <span class="text-sm">{{course.modules}} Modules</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button (click)="openDescriptionDialog()" class="p-1 bg-gray-700/50 rounded-full transition ease-in-out duration-200 hover:scale-105 active:scale-95">
+                            <hero-icon name="information-circle" type="outline" class="w-6 h-6 text-inherit"></hero-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <div class="bg-gray-400 rounded-full h-1">
+                        <div class="bg-white h-full rounded-full" [style.width.%]="enrollment ? enrollment.progress:0"></div>
+                    </div>
+                    <span class="font-medium text-xs">{{enrollment ? enrollment.progress:0}}% Completed</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="loading">
+        <div class="w-full h-40 bg-gray-200 animate-pulse"></div>
+    </ng-container>
+
+    <app-module-list *ngIf="course"></app-module-list>
+</div>

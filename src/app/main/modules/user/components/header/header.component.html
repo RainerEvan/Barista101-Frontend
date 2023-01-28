@@ -1,0 +1,24 @@
+<div class="fixed inset-x-0 top-0 z-20 p-2 bg-white shadow">
+    <header class="flex items-center justify-end text-sm">
+        <a [routerLink]="['./notification']" (click)="newNotification = false" routerLinkActive="active" #rla="routerLinkActive" class="relative flex items-center rounded-full p-1 font-medium transition ease-in-out duration-200 hover:scale-105 active:bg-gray-100">
+            <hero-icon name="bell" type="outline" class="w-6 h-6 text-brown" [class]="rla.isActive ? 'fill-brown text-brown':''"></hero-icon>
+            <div *ngIf="newNotification" class="absolute top-1.5 right-1.5 p-1 rounded-full bg-brown"></div>
+        </a>
+        <button (click)="toggleDropdown($event)" class="inline-flex items-center rounded-full p-1 font-medium transition ease-in-out duration-200 hover:scale-105 active:bg-gray-100">
+            <hero-icon name="user-circle" type="outline" class="w-6 h-6 text-brown"></hero-icon>
+            <hero-icon name="chevron-down" type="outline" class="w-4 h-4 text-brown"></hero-icon>
+        </button>
+    </header>
+    <ng-container *ngIf="showDropdown">
+        <div class="absolute right-4 z-10 w-32 rounded-md text-gray-900 bg-white drop-shadow-lg divide-y-2">
+            <a [routerLink]="['./profile']" class="w-full flex items-center space-x-1 p-2 font-medium transition ease-in-out duration-200 hover:bg-gray-100 active:bg-gray-100">
+                <hero-icon name="user-circle" type="outline" class="w-5 h-5 text-inherit"></hero-icon>
+                <span class="text-sm">Profile</span>
+            </a>
+            <button (click)="openSignoutDialog()" class="w-full flex items-center space-x-1 p-2 font-medium transition ease-in-out duration-200 hover:bg-gray-100 active:bg-gray-100">
+                <hero-icon name="logout" type="outline" class="w-5 h-5 text-inherit"></hero-icon>
+                <span class="text-sm">Sign Out</span>
+            </button>
+        </div>
+    </ng-container>
+</div>

@@ -1,0 +1,18 @@
+<div (click)="startCourse()" class="relative w-full h-40 rounded-3xl tracking-wide overflow-clip shadow-md cursor-pointer hover:shadow-lg active:scale-95 before:content-[''] before:absolute before:z-10 before:w-full before:h-full before:bg-gradient-to-r before:from-black/60 before:to-transparent">
+    <img [src]="course.thumbnail | img" alt="Course Thumbnail" class="absolute object-cover w-full h-full rounded-3xl">
+    <div class="absolute z-20 w-full h-full flex flex-col justify-between px-6 py-7 text-white">
+        <div class="w-full">
+            <h3 class="font-medium text-lg">{{course.title}}</h3>
+            <div class="flex items-center space-x-1 text-sm">
+                <hero-icon name="book-open" type="outline" class="w-5 h-5 text-inherit"></hero-icon>
+                <span class="text-sm">{{course.modules}} Modules</span>
+            </div>
+        </div>
+        <div class="w-full">
+            <div class="bg-gray-400 rounded-full h-1">
+                <div class="bg-white h-full rounded-full" [style.width.%]="enrollment ? enrollment.progress:0"></div>
+            </div>
+            <span class="font-medium text-xs">{{enrollment ? enrollment.progress:0}}% Completed</span>
+        </div>
+    </div>
+</div>

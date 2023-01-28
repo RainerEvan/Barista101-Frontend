@@ -1,0 +1,31 @@
+<div class="w-full my-8">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="font-bold text-3xl">Content List</h1>
+        <button (click)="openAddDialog()" class="button-primary flex items-center space-x-1.5">
+            <hero-icon name="plus" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+            <span class="text-sm">Add Content</span>
+        </button>
+    </div>
+    <div class="bg-brown rounded-md p-1 my-4 text-center text-white">{{contents.length}} Contents</div>
+    <ul class="container flex flex-col space-y-4 px-4">
+        <li *ngFor="let content of contents; let i = index" class="grid grid-cols-8 border rounded-md bg-white shadow-md hover:shadow-lg hover:-translate-y-0.5">
+            <a [routerLink]="['../../content/',content.id]" class="grid grid-cols-10 col-span-7 items-center">
+                <div class="col-span-1 p-2">
+                    <div class="aspect-square flex items-center justify-center rounded-md bg-brown p-2">
+                        <span class="font-medium text-white">{{i+1}}</span>
+                    </div>
+                </div>
+                <div class="col-span-9 p-2 flex flex-col justify-center">
+                    <span class="font-medium">{{content.title}}</span>
+                    <span class="text-xs">Created {{content.createdAt | date:'d MMM y, h:mm a'}}</span>
+                </div>
+            </a>
+            <button (click)="openDeleteDialog(content.id)" class="z-10 col-span-1 rounded-r-md bg-red-600 p-2 flex items-center justify-center hover:bg-red-500">
+                <hero-icon name="trash" type="solid" class="w-6 h-6 text-white fill-white"></hero-icon>
+            </button>
+        </li>
+        <ng-container *ngFor="let i of [0,1,2,3,4,5]">
+            <div *ngIf="loading" class="w-full h-14 bg-gray-200 rounded-md animate-pulse"></div>
+        </ng-container>
+    </ul>
+</div>

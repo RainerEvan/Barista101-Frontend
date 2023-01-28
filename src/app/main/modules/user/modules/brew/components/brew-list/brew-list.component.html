@@ -1,0 +1,19 @@
+<div class="container p-4">
+    <div>
+        <h1 class="font-bold text-3xl">Brew Assistant</h1>
+    </div>
+    <div class="grid grid-cols-3 gap-4 my-3 sm:grid-cols-5">
+        <button (click)="selectBrew(brew)" type="button" *ngFor="let brew of brews" class="aspect-square flex flex-col items-center justify-center space-y-2 tracking-wide focus:scale-95">
+            <div class="w-full h-full flex items-center justify-center rounded-xl bg-orange-100 shadow-md hover:shadow-lg">
+                <img [src]="brew.thumbnail | img" alt="Brew Thumbnail" class="w-20 h-20">
+            </div>
+            <span class="font-semibold text-sm">{{brew.title}}</span>
+        </button>
+
+        <ng-container *ngFor="let i of [0,1,2,3,4,5]">
+            <div *ngIf="loading" class="aspect-square bg-gray-200 rounded-xl animate-pulse"></div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="sr-only">v60 by Aris Sunjayay from <a href="https://thenounproject.com/browse/icons/term/v60/" target="_blank" title="v60 Icons">Noun Project</a></div>

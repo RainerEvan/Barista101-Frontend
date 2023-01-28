@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="font-bold text-3xl">Brew Details</h1>
+        <button (click)="openEditDialog()" class="button-primary flex items-center space-x-1.5">
+            <hero-icon name="pencil" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+            <span class="text-sm">Edit Brew</span>
+        </button>
+    </div>
+    <div class="flex flex-col space-y-4 my-4">
+        <div class="flex items-center space-x-4">
+            <div>
+                <img *ngIf="brew" [src]="brew.thumbnail | img" class="object-cover w-36 h-36 rounded-md bg-orange-100">
+                <div *ngIf="loading" class="w-36 h-36 rounded-md bg-gray-200 animate-pulse"></div>
+            </div>
+            <div class="flex flex-col justify-center space-y-4">
+                <div class="w-full">
+                    <h3 class="text-lg font-semibold">Title</h3>
+                    <span *ngIf="brew" class="text-sm">{{brew.title}}</span>
+                    <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+                </div>
+                <div class="w-full">
+                    <h3 class="text-lg font-semibold">Description</h3>
+                    <p *ngIf="brew" class="text-justify text-sm">{{brew.description}}</p>
+                    <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-6">
+            <div class="w-full">
+                <h3 class="text-lg font-semibold">Created</h3>
+                <span *ngIf="brew" class="text-sm">{{brew.createdAt | date:'d MMM y, h:mm a'}}</span>
+                <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+            </div>
+            <div class="w-full">
+                <h3 class="text-lg font-semibold">Grind Size</h3>
+                <p *ngIf="brew" class="text-sm capitalize">{{brew.grindSize}}</p>
+                <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+            </div>
+            <div class="w-full">
+                <h3 class="text-lg font-semibold">Coffee</h3>
+                <p *ngIf="brew" class="text-sm">{{brew.coffee}} gr</p>
+                <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+            </div>
+            <div class="w-full">
+                <h3 class="text-lg font-semibold">Water</h3>
+                <p *ngIf="brew" class="text-sm">{{brew.water}} gr</p>
+                <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+            </div>
+            <div class="w-full">
+                <h3 class="text-lg font-semibold">Ratio</h3>
+                <p *ngIf="brew" class="text-sm">1 : {{brew.ratio}}</p>
+                <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+            </div>
+            <div class="w-full">
+                <h3 class="text-lg font-semibold">Time</h3>
+                <p *ngIf="brew" class="text-sm">{{brew.time *1000 | date:'mm:ss'}}</p>
+                <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+            </div>
+            <div class="w-full">
+                <h3 class="text-lg font-semibold">Preparations</h3>
+                <ul class="space-y-2 pl-4 list-disc list-outside">
+                    <li *ngFor="let preparation of preparations" class="text-sm">{{preparation.item}}</li>
+                    <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+                </ul>
+            </div>
+            <div class="w-full">
+                <h3 class="text-lg font-semibold">Steps</h3>
+                <ul class="space-y-2 pl-4 list-disc list-outside">
+                    <li *ngFor="let step of steps" class="text-justify text-sm">{{step.desc}} - (water: {{step.water * 100}}%) - ({{step.seconds * 1000 | date:'mm:ss'}}) - (pour: {{step.pour}})</li>
+                    <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

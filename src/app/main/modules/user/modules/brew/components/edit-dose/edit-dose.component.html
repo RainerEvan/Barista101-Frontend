@@ -1,0 +1,61 @@
+<app-back-navigation label="Dose"></app-back-navigation>
+<div class="container p-4">
+    <form [formGroup]="doseForm" (ngSubmit)="editDose()" class="w-full max-w-md mx-auto flex flex-col tracking-wide">
+        <h1 class="font-bold text-xl">Dose Amount</h1>
+        <div class="flex flex-col divide-y-2 my-3">
+            <div class="inline-flex items-center justify-between space-x-4 py-3">
+                <label for="coffee" class="font-medium text-sm">{{cups}} Cup (s)</label>
+                <div class="inline-flex items-center">
+                    <button (click)="decrement()" type="button" class="px-4 py-2 rounded-l-md bg-brown">
+                        <hero-icon name="minus" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+                    </button>
+                    <button (click)="increment()" type="button" class="px-4 py-2 rounded-r-md bg-brown">
+                        <hero-icon name="plus" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="inline-flex items-center justify-between space-x-1 py-3">
+                <label for="coffee" class="font-medium text-sm">Coffee (gr)</label>
+                <input type="number" class="w-16 form-input hide-button" (change)="onChangeCoffee($event)" formControlName="coffee">
+            </div>
+            <div class="inline-flex items-center justify-between space-x-1 py-3">
+                <label for="water" class="font-medium text-sm">Water (gr)</label>
+                <input type="number" class="w-16 form-input hide-button" (change)="onChangeWater($event)" formControlName="water">
+            </div>
+            <div class="inline-flex items-center justify-between space-x-1 py-3">
+                <label for="ratio" class="font-medium text-sm">Ratio</label>
+                <select class="w-16 form-input cursor-pointer" (change)="onChangeRatio($event)" formControlName="ratio">
+                    <option *ngFor="let number of ratios" [value]="number" class="text-inherit text-sm">1 : {{number}}</option>
+                </select>
+            </div>
+            <div class="inline-flex items-center justify-between space-x-1 py-3">
+                <label for="time" class="font-medium text-sm">Expected time</label>
+                <span class="px-2 py-1 text-sm">{{brewData.time * 1000 | date : "mm:ss"}}</span>
+            </div>
+        </div>
+
+        <h1 class="font-bold text-xl">Grind Size</h1>
+        <ul class="flex flex-col divide-y-2 my-3">
+            <li *ngFor="let grind of grindSizes" class="w-full py-3">
+                <label [for]="grind.value" class="flex items-center justify-between space-x-6 cursor-pointer">
+                    <div class="flex flex-col">
+                        <span class="font-semibold">{{grind.name}}</span>
+                        <p class="text-sm text-justify">{{grind.description}}</p>
+                    </div>
+                    <div class="pr-2">
+                        <input type="radio" [id]="grind.value" [value]="grind.value" class="hidden peer" formControlName="grindSize">
+                        <div class="aspect-square flex items-center justify-center p-1 font-medium text-sm text-center border-2 border-brown rounded-full peer-checked:text-white peer-checked:bg-brown cursor-pointer">
+                            <hero-icon name="check" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+                        </div>
+                    </div>
+                </label>
+            </li>
+        </ul>
+        <div class="flex items-center justify-evenly space-x-4 py-3">
+            <button type="submit" [disabled]="doseForm.invalid" class="w-full button-primary">Done</button>
+        </div>
+    </form>
+</div>
+<ng-container *ngIf="loading">
+    <app-loading-dialog label="Updating dose amount"></app-loading-dialog>
+</ng-container>

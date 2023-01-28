@@ -1,0 +1,35 @@
+<div class="relative w-[80vw] max-w-xl max-h-[650px] mx-6 p-6 bg-white rounded-md overflow-y-scroll sm:mx-0 sm:w-[60vw]">
+    <button (click)="closeDialog()" class="absolute top-4 right-4 rounded-full p-1 hover:bg-gray-200 active:scale-95">
+        <hero-icon name="x" type="outline" class="w-6 h-6 text-inherit"></hero-icon>
+    </button>
+    <div class="space-y-4">
+        <h1 class="font-semibold text-xl">{{data.title}}</h1>
+        <form [formGroup]="accountForm" (ngSubmit)="editAccount()" class="flex flex-col space-y-4">
+            <div class="flex items-center justify-center">
+                <div (click)="fileInput.click()" class="relative w-24 h-24 cursor-pointer">
+                    <img *ngIf="imageUrl" [src]="imageUrl" alt="Profile Image" class="object-cover w-full h-full rounded-full border border-gray-300">
+                    <input #fileInput accept="image/*" type="file" class="hidden" (change)="onSelectFile($event)"/>
+                    <div class="absolute -bottom-1 right-0 w-7 h-7 flex items-center justify-center p-1 rounded-full bg-brown">
+                        <hero-icon name="camera" type="outline" class="w-5 h-5 text-white"></hero-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-1">
+                <label for="fullname" class="font-medium">Fullname</label>
+                <input type="text" placeholder="Enter fullname" class="input-text" formControlName="fullname">
+            </div>
+            <div class="space-y-1">
+                <label for="username" class="font-medium">Username</label>
+                <input type="text" placeholder="Enter username" class="input-text" formControlName="username">
+            </div>
+            <div class="space-y-1">
+                <label for="email" class="font-medium">Email</label>
+                <input type="text" placeholder="Enter email" class="input-text" formControlName="email">
+            </div>
+            <div class="flex items-center justify-evenly space-x-4 pt-4">
+                <button type="submit" class="w-full button-primary">Save</button>
+                <button type="button" (click)="closeDialog()" class="w-full button-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

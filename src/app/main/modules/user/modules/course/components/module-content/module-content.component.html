@@ -1,0 +1,34 @@
+<app-back-navigation label="Module"></app-back-navigation>
+<div *ngIf="currentContent" class="relative container bg-orange-100 tracking-wide">
+    <div class="absolute top-4 right-4 flex items-center px-3 py-1.5 rounded-full shadow-md bg-brown">
+        <span class="text-sm text-white">{{currentPage+1}} of {{contents.length}} Pages</span>
+    </div>
+    <div [class]="currentContent.thumbnail ? '':'py-6'">
+        <img *ngIf="currentContent.thumbnail" [src]="currentContent.thumbnail | img" alt="Content Thumbnail" class="w-full h-auto object-cover">
+    </div>
+    <div class="flex flex-col space-y-4 p-6">
+        <h1 class="font-semibold text-lg">{{currentContent.title}}</h1>
+        <div class="text-justify text-sm" [innerHTML]="currentContent.body"></div>
+        <div class="grid grid-cols-5 pt-2">
+            <div class="col-span-1 flex items-center justify-start">
+                <button *ngIf="currentPage != 0" (click)="previousPage()" class="flex items-center justify-center p-3 bg-brown text-white rounded-full shadow-md transition ease-in-out duration-200 hover:scale-105 active:scale-95 disabled:bg-gray-300 disabled:text-gray-400 disabled:scale-100">
+                    <hero-icon name="chevron-left" type="outline" class="w-6 h-6 text-inherit"></hero-icon>
+                </button>
+            </div>
+            <div class="col-span-3 flex items-center justify-center">
+                <button *ngIf="currentPage == (contents.length-1)" (click)="finishModule()" class="w-full flex items-center justify-center p-3 bg-brown rounded-full shadow-md transition ease-in-out duration-200 hover:scale-105 active:scale-95">
+                    <span class="text-white">FINISH</span>
+                </button>
+            </div>
+            <div class="col-span-1 flex items-center justify-end">
+                <button *ngIf="currentPage != (contents.length-1)" (click)="nextPage()" class="flex items-center justify-center p-3 bg-brown text-white rounded-full shadow-md transition ease-in-out duration-200 hover:scale-105 active:scale-95 disabled:bg-gray-300 disabled:text-gray-400 disabled:scale-100">
+                    <hero-icon name="chevron-right" type="outline" class="w-6 h-6 text-inherit"></hero-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-container *ngIf="loading">
+    <app-loading-dialog label="Loading content"></app-loading-dialog>
+</ng-container>

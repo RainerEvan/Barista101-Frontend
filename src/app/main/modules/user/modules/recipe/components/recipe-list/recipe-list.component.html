@@ -1,0 +1,9 @@
+<div class="container p-4">
+    <div class="flex flex-row justify-between">
+        <h1 class="font-bold text-3xl">Recipe</h1>
+        <a [routerLink]="['./add']" class="fixed right-6 bottom-20 bg-brown p-3 rounded-full shadow-md transition ease-in-out duration-200 hover:scale-105 active:scale-95">
+            <hero-icon name="plus" type="outline" class="w-6 h-6 text-white"></hero-icon>
+        </a>
+    </div>
+    <app-category-list></app-category-list>
+</div>

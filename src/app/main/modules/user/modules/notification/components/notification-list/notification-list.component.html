@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="p-4">
+        <h1 class="font-bold text-3xl">Notifications</h1>
+    </div>
+    <div class="flex flex-col divide-y divide-gray-300">
+        <a *ngFor="let notification of notifications" [routerLink]="getData(notification.data).link" class="w-full flex flex-col space-y-3 p-4 bg-white tracking-wide focus:bg-gray-100">
+            <div class="flex flex-row items-center space-x-3">
+                <hero-icon [name]="icons[getData(notification.data).icon].name" type="solid" class="w-10 h-10" [class]="icons[getData(notification.data).icon].style"></hero-icon>
+                <span class="font-medium text-sm" [innerHTML]="notification.body"></span>
+            </div>
+            <span class="font-medium text-xs text-gray-400">{{notification.createdAt | date:'d MMM y, h:mm a'}}</span>
+        </a>
+        <ng-container *ngFor="let i of [0,1,2,3]">
+            <div *ngIf="loading" class="w-full h-24 bg-gray-200 animate-pulse my-2"></div>
+        </ng-container>
+    </div>
+    <ng-container *ngIf="!loading && notifications.length == 0">
+        <div class="w-full h-96 flex items-center justify-center p-8">
+            <span class="text-sm text-gray-400">No notifications yet</span>
+        </div>
+    </ng-container>
+</div>

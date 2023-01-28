@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="">
+        <h1 class="font-bold text-3xl">Account</h1>
+    </div>
+    <ul class="container grid grid-cols-3 gap-4 my-4">
+        <a *ngFor="let account of accounts" [routerLink]="['./',account.id]" class="flex flex-row items-center border rounded-md bg-white shadow-md hover:shadow-lg hover:-translate-y-0.5">
+            <div class="flex items-center justify-center p-4">
+                <img [src]="account.profileImg | img" alt="Account Profile Image" class="object-fill w-20 h-20 rounded-full">
+            </div>
+            <div class="flex flex-col justify-center py-4">
+                <span class="font-medium">{{account.fullname}}</span>
+                <span class="text-sm">{{account.username}}</span>
+            </div>
+        </a>
+        <ng-container *ngFor="let i of [0,1,2,3,4,5]">
+            <div *ngIf="loading" class="w-full h-32 bg-gray-200 rounded-md animate-pulse"></div>
+        </ng-container>
+    </ul>
+</div>

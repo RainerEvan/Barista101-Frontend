@@ -1,0 +1,8 @@
+<div class="max-w-md flex flex-col items-center justify-center space-y-4 mx-6 p-6 bg-white rounded-xl sm:mx-0">
+    <div class="flex flex-col items-center justify-center space-y-1 p-4">
+        <hero-icon *ngIf="icon" [name]="icon" type="solid" class="w-10 h-10 text-orange-400 fill-orange-400"></hero-icon>
+        <span class="font-semibold text-xl text-center">{{data.title}}</span>
+        <span class="text-center">{{data.description}}</span>
+    </div>
+    <button (click)="continue()" class="w-full button-primary">Continue</button>
+</div>

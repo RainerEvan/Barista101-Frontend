@@ -1,0 +1,31 @@
+<app-back-navigation label="Add Thread"></app-back-navigation>
+<div class="container p-4">
+    <form [formGroup]="forumForm" (ngSubmit)="addForum()" class="flex flex-col space-y-2 my-3 tracking-wide">
+        <div class="flex flex-col space-y-3">
+            <div>
+                <label for="title" class="sr-only">Title</label>
+                <input type="text" placeholder="Add title*" class="w-full font-medium text-lg text-justify focus:outline-none" formControlName="title">
+            </div>
+            <div>
+                <label for="body" class="sr-only">Body</label>
+                <textarea cdkTextareaAutosize #autotextarea="cdkTextareaAutosize" cdkAutosizeMinRows="3" placeholder="Add optional body text" class="w-full text-sm text-justify resize-none overflow-hidden focus:outline-none" formControlName="body"></textarea>
+            </div>
+        </div>
+        <div *ngIf="thumbnail">
+            <img [src]="imageUrl" class="w-full h-full rounded-lg">
+        </div>
+        <div class="inline-flex items-center justify-between space-x-4 py-2">
+            <button type="button" (click)="fileInput.click()" class="w-fit cursor-pointer">
+                <hero-icon name="photograph" type="outline" class="w-6 h-6 text-brown"></hero-icon>
+                <input #fileInput accept="image/*" type="file" class="hidden" (change)="onSelectFile($event)"/>
+            </button>
+            <button [disabled]="forumForm.invalid" type="submit" class="w-fit inline-flex items-center space-x-2 button-primary">
+                <hero-icon name="paper-airplane" type="outline" class="w-3 h-3 rotate-90 text-white"></hero-icon>
+                <span class="text-white">Post</span>
+            </button>
+        </div>
+    </form>
+</div>
+<ng-container *ngIf="loading">
+    <app-loading-dialog label="Creating thread"></app-loading-dialog>
+</ng-container>

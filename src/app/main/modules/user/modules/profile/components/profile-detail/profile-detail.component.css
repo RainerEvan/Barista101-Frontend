@@ -1,0 +1,3 @@
+.active{
+    @apply text-brown border-b-2 border-brown;
+}

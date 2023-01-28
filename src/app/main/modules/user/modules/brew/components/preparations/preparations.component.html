@@ -1,0 +1,28 @@
+<app-back-navigation label="Brew"></app-back-navigation>
+<div class="container p-4">
+    <div>
+        <h1 class="font-bold text-3xl">Preparations</h1>
+    </div>
+    <div class="space-y-12 my-8">
+        <div class="flex flex-col space-y-5">
+            <div *ngFor="let preparation of preparations" class="inline-flex items-center justify-between space-x-4">
+                <label for="coffee" class="font-medium">{{preparation.item}}</label>
+                <div class="pr-2">
+                    <input type="checkbox" [checked]="preparation.status" class="hidden peer">
+                    <div (click)="toggleCheck(preparation)" class="aspect-square flex items-center justify-center font-medium text-sm text-center border-2 border-brown rounded-md peer-checked:text-white peer-checked:bg-brown cursor-pointer">
+                        <hero-icon name="check" type="solid" class="w-5 h-5 text-white fill-white"></hero-icon>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngFor="let i of [0,1,2,3,4,5]">
+                <div *ngIf="loading" class="w-full h-6 bg-gray-200 rounded-md animate-pulse"></div>
+            </ng-container>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button (click)="updatePreparations()" type="button" class="w-full button-primary">Done</button>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="loading">
+    <app-loading-dialog label="Updating preparations"></app-loading-dialog>
+</ng-container>

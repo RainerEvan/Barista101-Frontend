@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="font-bold text-3xl">Recipe Category</h1>
+        <button (click)="openAddDialog()" class="button-primary flex items-center space-x-1.5">
+            <hero-icon name="plus" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+            <span class="text-sm">Add Category</span>
+        </button>
+    </div>
+    <div class="grid grid-cols-3 gap-4 my-4">
+        <li *ngFor="let category of recipeCategories" class="grid grid-cols-4 gap-1 border rounded-md bg-white shadow-md hover:shadow-lg hover:-translate-y-0.5">
+            <a [routerLink]="['./',category.id]" class="col-span-3 flex items-center px-4 py-6">
+                <span class="font-medium">{{category.name}}</span>
+            </a>
+            <button (click)="openDeleteDialog(category.id)" class="z-10 col-span-1 rounded-r-md bg-red-600 p-2 flex items-center justify-center hover:bg-red-500">
+                <hero-icon name="trash" type="solid" class="w-6 h-6 text-white fill-white"></hero-icon>
+            </button>
+        </li>
+
+        <ng-container *ngFor="let i of [0,1,2,3,4,5]">
+            <div *ngIf="loading" class="w-full h-20 bg-gray-200 rounded-md animate-pulse"></div>
+        </ng-container>
+    </div>
+</div>

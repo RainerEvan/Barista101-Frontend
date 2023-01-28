@@ -1,0 +1,101 @@
+<app-back-navigation label="Add Recipe"></app-back-navigation>
+<div class="container p-4">
+    <form [formGroup]="recipeForm" (ngSubmit)="addRecipe()" class="w-full max-w-md mx-auto flex flex-col space-y-4 my-3 tracking-wide">
+        <div class="space-y-1">
+            <label for="title" class="font-medium">Title*</label>
+            <input type="text" placeholder="Enter title" class="input-text" formControlName="title">
+        </div>
+        <div class="space-y-1">
+            <label for="recipeCategoryId" class="font-medium">Category*</label>
+            <div class="relative">
+                <select class="input-text appearance-none cursor-pointer" formControlName="recipeCategoryId">
+                    <option [value]="null">Select category</option>
+                    <option *ngFor="let category of categories" [value]="category.id" class="text-inherit text-sm">{{category.name}}</option>
+                </select>
+                <hero-icon name="chevron-down" type="outline" class="absolute top-2.5 right-3 w-4 h-4 text-inherit pointer-events-none"></hero-icon>
+            </div>
+        </div>
+        <div class="space-y-1">
+            <label for="description" class="font-medium">Description*</label>
+            <textarea rows="4" placeholder="Enter description" class="input-text" formControlName="description"></textarea>
+        </div>
+        <div class="space-y-1">
+            <div class="w-full inline-flex justify-between">
+                <label for="equipments" class="font-medium">Equipments*</label>
+                <button (click)="addEquipment()" type="button" class="inline-flex items-center space-x-1 rounded-full">
+                    <hero-icon name="plus" type="outline" class="w-3 h-3 text-inherit"></hero-icon>
+                    <span class="text-sm text-brown">Add Item</span>
+                </button>
+            </div>
+            <div formArrayName="equipments" class="space-y-3">
+                <div *ngFor="let equipment of equipments.controls; let i = index" class="">
+                    <div [formGroup]="equipment" class="w-full inline-flex space-x-2">
+                        <input type="text" [placeholder]="'Equipment '+(i+1)"  class="input-text" formControlName="item">
+                        <button (click)="deleteEquipment(i)" type="button" class="flex items-center justify-center rounded-full">
+                            <hero-icon name="x-circle" type="solid" class="w-6 h-6 text-brown fill-brown"></hero-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="space-y-1">
+            <div class="w-full inline-flex justify-between">
+                <label for="ingredients" class="font-medium">Ingredients*</label>
+                <button (click)="addIngredient()" type="button" class="inline-flex items-center space-x-1 rounded-full">
+                    <hero-icon name="plus" type="outline" class="w-3 h-3 text-inherit"></hero-icon>
+                    <span class="text-sm text-brown">Add Item</span>
+                </button>
+            </div>
+            <div formArrayName="ingredients" class="space-y-3">
+                <div *ngFor="let ingredient of ingredients.controls; let i = index" class="">
+                    <div [formGroup]="ingredient" class="w-full inline-flex space-x-2">
+                        <input type="text" [placeholder]="'Ingredient '+(i+1)" class="input-text" formControlName="item">
+                        <button (click)="deleteIngredient(i)" type="button" class="flex items-center justify-center rounded-full">
+                            <hero-icon name="x-circle" type="solid" class="w-6 h-6 text-brown fill-brown"></hero-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="space-y-1">
+            <div class="w-full inline-flex justify-between">
+                <label for="instructions" class="font-medium">Instructions*</label>
+                <button (click)="addInstruction()" type="button" class="inline-flex items-center space-x-1 rounded-full">
+                    <hero-icon name="plus" type="outline" class="w-3 h-3 text-inherit"></hero-icon>
+                    <span class="text-sm text-brown">Add Item</span>
+                </button>
+            </div>
+            <div formArrayName="instructions" class="space-y-3">
+                <div *ngFor="let instruction of instructions.controls; let i = index" class="">
+                    <div [formGroup]="instruction" class="w-full inline-flex space-x-2">
+                        <input type="text" [placeholder]="'Step '+(i+1)" class="input-text" formControlName="item">
+                        <button (click)="deleteInstruction(i)" type="button" class="flex items-center justify-center rounded-full">
+                            <hero-icon name="x-circle" type="solid" class="w-6 h-6 text-brown fill-brown"></hero-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="space-y-1">
+            <label for="notes" class="font-medium">Notes (optional)</label>
+            <textarea rows="3" placeholder="Enter notes" class="input-text" formControlName="notes"></textarea>
+        </div>
+        <div class="space-y-1">
+            <label for="thumbnail" class="font-medium">Thumbnail</label>
+            <div draggable="true" (click)="fileInput.click()" class="input-image h-80 bg-gray-50 cursor-pointer">
+                <img *ngIf="thumbnail" [src]="imageUrl" class="object-cover w-full h-full rounded-md">
+                <div *ngIf="!thumbnail" class="w-full h-full flex flex-col items-center justify-center space-y-1"> 
+                    <hero-icon name="photograph" type="outline" class="w-6 h-6 text-inherit"></hero-icon>
+                    <span class="text-inherit text-sm">Select or Drop Image</span>
+                </div>
+                <input #fileInput accept="image/*" type="file" class="hidden" (change)="onSelectFile($event)"/>
+            </div>
+        </div>
+        <div class="flex flex-col items-center justify-evenly space-y-2 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+            <button type="submit" [disabled]="recipeForm.invalid" class="w-full button-primary">Create</button>
+        </div>
+    </form>
+</div>
+<ng-container *ngIf="loading">
+    <app-loading-dialog label="Creating recipe"></app-loading-dialog>
+</ng-container>

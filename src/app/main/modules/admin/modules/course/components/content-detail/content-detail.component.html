@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="font-bold text-3xl">Content Details</h1>
+        <button (click)="openEditDialog()" class="button-primary flex items-center space-x-1.5">
+            <hero-icon name="pencil" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+            <span class="text-sm">Edit Content</span>
+        </button>
+    </div>
+    <div *ngIf="content" class="w-full max-w-screen-sm mx-auto my-4 rounded-lg bg-orange-100">
+        <div>
+            <img *ngIf="content.thumbnail" [src]="content.thumbnail | img" alt="Content Thumbnail" class="object-cover w-full h-auto">
+        </div>
+        <div class="space-y-2 p-6">
+            <h1 class="font-semibold text-lg">{{content.title}}</h1>
+            <div class="text-justify text-sm" [innerHTML]="content.body"></div>
+        </div>
+    </div>
+    <div *ngIf="loading" class="w-full h-96 max-w-screen-sm mx-auto bg-gray-200 rounded-md animate-pulse my-3"></div>
+</div>

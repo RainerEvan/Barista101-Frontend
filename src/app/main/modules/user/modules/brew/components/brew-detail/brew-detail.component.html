@@ -1,0 +1,68 @@
+<app-back-navigation label="Brew" link="./brew"></app-back-navigation>
+<div class="container tracking-wide">
+    <div class="w-full max-w-md mx-auto flex flex-col items-center space-y-4 p-4">
+        <div *ngIf="brew" class="w-full inline-flex items-center space-x-4 p-2">
+            <div class="flex items-center justify-center">
+                <div class="w-20 h-20 p-3 rounded-xl bg-orange-100 shadow-md">
+                    <img [src]="brew.thumbnail | img" alt="Brew Thumbnail" class="w-full h-full">
+                </div>
+            </div>
+            <div class="flex flex-col space-y-1">
+                <span class="font-semibold">{{brew.title}}</span>
+                <span class="text-xs text-justify">{{brew.description}}</span>
+            </div>
+        </div>
+        <div *ngIf="loading" class="w-full h-20 bg-gray-200 rounded-xl animate-pulse"></div>
+
+        <a *ngIf="brew" [routerLink]="['../../dose']" class="relative w-full aspect-square max-w-sm focus:scale-95">
+            <div class="absolute w-full aspect-square flex items-center justify-center p-14 rounded-full bg-orange-100">
+                <div class="w-full aspect-square grid grid-rows-2 divide-y-2 divide-brown text-center">
+                    <div class="grid grid-cols-2 divide-x-2 divide-brown">
+                        <div class="flex flex-col items-center justify-end space-y-1 py-4">
+                            <span class="font-semibold text-sm">COFFEE</span>
+                            <span class="text-sm">{{brewData.coffee}} gr</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-end space-y-1 py-4">
+                            <span class="font-semibold text-sm">WATER</span>
+                            <span class="text-sm">{{brewData.water}} gr</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 divide-x-2 divide-brown">
+                        <div class="flex flex-col items-center justify-start space-y-1 py-4">
+                            <span class="font-semibold text-sm">GRIND SIZE</span>
+                            <span class="text-sm uppercase">{{brewData.grindSize}}</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-start space-y-1 py-4">
+                            <span class="font-semibold text-sm">RATIO</span>
+                            <span class="text-sm">1 : {{brewData.ratio}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <svg class="absolute -scale-x-100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g class="fill-transparent stroke-transparent">
+                  <circle class="stroke-[4px] stroke-orange-50" cx="50" cy="50" r="45"></circle>
+                </g>
+            </svg>
+        </a>
+        <div *ngIf="loading" class="w-full aspect-square max-w-md bg-gray-200 rounded-full animate-pulse"></div>
+
+        <div *ngIf="brew" class="w-full flex flex-col items-center justify-center space-y-6">
+            <div class="flex flex-col items-center space-y-1">
+                <hero-icon name="exclamation" type="outline" class="w-5 h-5 text-transparent fill-brown"></hero-icon>
+                <span class="font-semibold text-sm">TAP AMOUNTS TO CHANGE DOSE</span>
+            </div>
+            <button [routerLink]="['../../simulation']" class="focus:scale-95">
+                <hero-icon name="play" type="solid" class="w-20 h-20 text-brown fill-brown"></hero-icon>
+            </button>
+            <div class="w-full flex flex-row items-center justify-evenly space-x-4">
+                <button [routerLink]="['../../preparations']" class="w-full button-tertiary">Preparations</button>
+                <button [routerLink]="['../../steps']" class="w-full button-tertiary">Steps</button>
+            </div>
+        </div>
+        <div *ngIf="loading" class="w-full h-40 bg-gray-200 rounded-xl animate-pulse"></div>
+        
+    </div>
+</div>
+
+<div class="sr-only">v60 by Aris Sunjayay from <a href="https://thenounproject.com/browse/icons/term/v60/" target="_blank" title="v60 Icons">Noun Project</a></div>

@@ -1,0 +1,11 @@
+<div class="flex flex-col space-y-3 max-w-md mx-6 p-6 bg-white rounded-xl sm:mx-0">
+    <div class="flex flex-row items-start justify-between">
+        <h1 class="font-semibold text-lg">{{data.title}}</h1>
+        <button (click)="closeDialog()" class="rounded-full p-1 hover:bg-gray-200 active:scale-95">
+            <hero-icon name="x" type="outline" class="w-5 h-5 text-inherit"></hero-icon>
+        </button>
+    </div>
+    <div class="flex">
+        <p class="text-justify text-sm">{{data.description}}</p>
+    </div>
+</div>

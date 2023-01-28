@@ -1,0 +1,12 @@
+<div class="flex flex-col space-y-5 my-3">
+    <div *ngFor="let category of recipeCategories" class="flex flex-col">
+        <div class="flex flex-row items-center justify-between">
+            <h2 class="font-semibold text-xl">{{category.name}}</h2>
+            <a [routerLink]="['./category/',category.id]" class="text-sm text-red-800">See More ></a>
+        </div>
+        <app-recipe-carousel [categoryId]="category.id"></app-recipe-carousel>
+    </div>
+    <ng-container *ngFor="let i of [0,1,2]">
+        <div *ngIf="loading" class="w-full h-40 bg-gray-200 rounded-xl animate-pulse"></div>
+    </ng-container>
+</div>

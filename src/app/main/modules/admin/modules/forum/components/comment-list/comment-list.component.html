@@ -1,0 +1,10 @@
+<div class="container tracking-wide divide-y divide-gray-300">
+    <div class="w-full px-4 py-2 bg-white">
+        <span class="font-medium text-sm">({{comments.length}}) Comments</span>
+    </div>
+    <div class="w-full flex flex-col divide-y divide-gray-300">
+        <div *ngFor="let comment of comments">
+            <app-comment-detail [comment]="comment" (commentId)="deleteForumComment($event)"></app-comment-detail>
+        </div>
+    </div>
+</div>

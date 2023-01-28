@@ -1,0 +1,33 @@
+<div class="relative w-[80vw] max-w-md max-h-[650px] mx-6 p-6 bg-white rounded-md overflow-y-scroll sm:mx-0 sm:w-[60vw]">
+    <button (click)="closeDialog()" class="absolute top-4 right-4 rounded-full p-1 hover:bg-gray-200 active:scale-95">
+        <hero-icon name="x" type="outline" class="w-6 h-6 text-inherit"></hero-icon>
+    </button>
+    <div class="space-y-4">
+        <h1 class="font-semibold text-xl">{{data.title}}</h1>
+        <form [formGroup]="contentForm" (ngSubmit)="addContent()" class="flex flex-col space-y-4">
+            <div class="space-y-1">
+                <label for="thumbnail" class="font-medium">Thumbnail</label>
+                <div draggable="true" (click)="fileInput.click()" class="input-image h-96 bg-gray-50 cursor-pointer">
+                    <img *ngIf="thumbnail" [src]="imageUrl" class="object-cover w-full h-full rounded-md">
+                    <div *ngIf="!thumbnail" class="w-full h-full flex flex-col items-center justify-center space-y-1"> 
+                        <hero-icon name="photograph" type="outline" class="w-6 h-6 text-inherit"></hero-icon>
+                        <span class="text-inherit">Select or Drop Image</span>
+                    </div>
+                    <input #fileInput accept="image/*" type="file" class="hidden" (change)="onSelectFile($event)"/>
+                </div>
+            </div>
+            <div class="space-y-1">
+                <label for="title" class="font-medium">Title*</label>
+                <input type="text" placeholder="Enter title" class="input-text" formControlName="title">
+            </div>
+            <div class="space-y-1">
+                <label for="body" class="font-medium">Body*</label>
+                <textarea rows="10" placeholder="Enter body" class="input-text" formControlName="body"></textarea>
+            </div>
+            <div class="flex items-center justify-evenly space-x-4 pt-4">
+                <button type="submit" [disabled]="contentForm.invalid" class="w-full button-primary">Submit</button>
+                <button type="button" (click)="resetForm(contentForm)" class="w-full button-secondary">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>

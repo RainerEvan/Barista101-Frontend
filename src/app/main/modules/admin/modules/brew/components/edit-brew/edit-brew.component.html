@@ -1,0 +1,119 @@
+<div class="relative w-[80vw] max-w-lg max-h-[650px] mx-6 p-6 bg-white rounded-md overflow-y-scroll sm:mx-0 sm:w-[60vw]">
+    <button (click)="closeDialog()" class="absolute top-4 right-4 rounded-full p-1 hover:bg-gray-200 active:scale-95">
+        <hero-icon name="x" type="outline" class="w-6 h-6 text-inherit"></hero-icon>
+    </button>
+    <div class="space-y-4">
+        <h1 class="font-semibold text-xl">{{data.title}}</h1>
+        <form [formGroup]="brewForm" (ngSubmit)="editBrew()" class="flex flex-col space-y-4">
+            <div class="space-y-1">
+                <label for="thumbnail" class="font-medium">Thumbnail</label>
+                <div draggable="true" (click)="fileInput.click()" class="input-image aspect-square text-gray-500 bg-gray-50 cursor-pointer">
+                    <img *ngIf="imageUrl" [src]="imageUrl" class="object-cover w-full h-full rounded-md">
+                    <div *ngIf="!imageUrl" class="w-full h-full flex flex-col items-center justify-center space-y-1"> 
+                        <hero-icon name="photograph" type="outline" class="w-6 h-6 text-inherit"></hero-icon>
+                        <span class="text-inherit">Select or Drop Image</span>
+                    </div>
+                    <input #fileInput accept="image/*" type="file" class="hidden" (change)="onSelectFile($event)"/>
+                </div>
+            </div>
+            <div class="space-y-1">
+                <label for="title" class="font-medium">Title*</label>
+                <input type="text" placeholder="Enter title" class="input-text" formControlName="title">
+            </div>
+            <div class="space-y-1">
+                <label for="description" class="font-medium">Description*</label>
+                <textarea rows="4" placeholder="Enter description" class="input-text resize-none" formControlName="description"></textarea>
+            </div>
+            <div class="space-y-1">
+                <label for="grindSize" class="font-medium">Grind Size*</label>
+                <div class="relative">
+                    <select class="input-text appearance-none cursor-pointer" formControlName="grindSize">
+                        <option [value]="null">Select grind size</option>
+                        <option *ngFor="let grind of grindSizes" [value]="grind.value" class="text-inherit text-sm">{{grind.name}}</option>
+                    </select>
+                    <hero-icon name="chevron-down" type="outline" class="absolute top-2.5 right-3 w-4 h-4 text-inherit pointer-events-none"></hero-icon>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label for="title" class="font-medium">Coffee (gr)*</label>
+                    <input type="number" placeholder="Enter coffee in gram" class="input-text" formControlName="coffee">
+                </div>
+                <div class="space-y-1">
+                    <label for="title" class="font-medium">Water (gr)*</label>
+                    <input type="number" placeholder="Enter water in gram" class="input-text" formControlName="water">
+                </div>
+                <div class="space-y-1">
+                    <label for="title" class="font-medium">Ratio (1:x)*</label>
+                    <input type="number" placeholder="Enter ratio for x only" class="input-text" formControlName="ratio">
+                </div>
+                <div class="space-y-1">
+                    <label for="title" class="font-medium">Time (second)*</label>
+                    <input type="number" placeholder="Enter time in seconds" class="input-text" formControlName="time">
+                </div>
+            </div>
+            <div class="space-y-1">
+                <div class="w-full inline-flex justify-between">
+                    <label for="preparations" class="font-medium">Preparations*</label>
+                    <button (click)="addPreparation()" type="button" class="inline-flex items-center space-x-1 rounded-full">
+                        <hero-icon name="plus" type="outline" class="w-3 h-3 text-inherit"></hero-icon>
+                        <span class="text-sm text-brown">Add Item</span>
+                    </button>
+                </div>
+                <div formArrayName="preparations" class="space-y-3">
+                    <div *ngFor="let preparation of preparations.controls; let i = index" class="">
+                        <div [formGroup]="preparation" class="w-full inline-flex space-x-2">
+                            <input type="text" [placeholder]="'Item '+(i+1)"  class="input-text" formControlName="item">
+                            <button (click)="deletePreparation(i)" type="button" class="flex items-center justify-center rounded-full">
+                                <hero-icon name="x-circle" type="solid" class="w-6 h-6 text-brown fill-brown"></hero-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-1">
+                <div class="w-full inline-flex justify-between">
+                    <label for="steps" class="font-medium">Steps*</label>
+                    <button (click)="addStep()" type="button" class="inline-flex items-center space-x-1 rounded-full">
+                        <hero-icon name="plus" type="outline" class="w-3 h-3 text-inherit"></hero-icon>
+                        <span class="text-sm text-brown">Add Item</span>
+                    </button>
+                </div>
+                <div formArrayName="steps" class="space-y-3">
+                    <div *ngFor="let step of steps.controls; let i = index" class="">
+                        <div [formGroup]="step" class="w-full inline-flex items-center space-x-2">
+                            <div class="w-full grid grid-cols-5 gap-4">
+                                <div class="col-span-5">
+                                    <label for="step" class="text-sm text-gray-500">Step {{i+1}}</label>
+                                </div>
+                                <div class="col-span-5">
+                                    <input type="text" placeholder="Enter step description"  class="input-text" formControlName="desc">
+                                </div>
+                                <div class="col-span-2">
+                                    <input type="number" placeholder="Water ex: 0.2"  class="input-text hide-button" formControlName="water">
+                                </div>
+                                <div class="col-span-2">
+                                    <input type="number" placeholder="Seconds ex: 30"  class="input-text hide-button" formControlName="seconds">
+                                </div>
+                                <div class="col-span-1 inline-flex items-center space-x-2">
+                                    <label for="pour" class="text-sm text-gray-500">Pour</label>
+                                    <input #pourCheck type="checkbox" [checked]="step.pour" class="hidden peer" formControlName="pour">
+                                    <div (click)="pourCheck.click()" class="w-5 h-5 flex items-center justify-center text-center border border-gray-400 rounded-md peer-checked:text-white peer-checked:bg-brown cursor-pointer">
+                                        <hero-icon name="check" type="solid" class="w-5 h-5 text-white fill-white"></hero-icon>
+                                    </div>
+                                </div>
+                            </div>
+                            <button (click)="deleteStep(i)" type="button" class="flex items-center justify-center rounded-full">
+                                <hero-icon name="x-circle" type="solid" class="w-6 h-6 text-brown fill-brown"></hero-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-evenly space-x-4 pt-4">
+                <button type="submit" [disabled]="brewForm.invalid" class="w-full button-primary">Save</button>
+                <button type="button" (click)="closeDialog()" class="w-full button-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

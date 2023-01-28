@@ -1,0 +1,13 @@
+<div class="container p-4">
+    <div>
+        <h1 class="font-bold text-3xl">Course</h1>
+    </div>
+    <div class="grid grid-flow-row gap-4 my-3 sm:grid-cols-2">
+        <a *ngFor="let course of courses">
+            <app-course-progress [course]="course"></app-course-progress>
+        </a>
+        <ng-container *ngFor="let i of [0,1,2,3,4,5]">
+            <div *ngIf="loading" class="w-full h-40 bg-gray-200 rounded-3xl animate-pulse"></div>
+        </ng-container>
+    </div>
+</div>

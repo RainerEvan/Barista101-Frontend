@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="font-bold text-3xl">Module Details</h1>
+        <button (click)="openEditDialog()" class="button-primary flex items-center space-x-1.5">
+            <hero-icon name="pencil" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+            <span class="text-sm">Edit Module</span>
+        </button>
+    </div>
+    <div class="w-full flex items-center space-x-4 my-4">
+        <div>
+            <img *ngIf="module" [src]="module.thumbnail | img" class="object-cover w-40 h-40 rounded-md">
+            <div *ngIf="loading" class="w-40 h-40 rounded-md bg-gray-200 animate-pulse"></div>
+        </div>
+        <div class="flex flex-col justify-center space-y-4">
+            <div class="block">
+                <h3 class="text-lg font-semibold">Title</h3>
+                <span *ngIf="module" class="text-sm">{{module.title}}</span>
+                <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+            </div>
+            <div class="block">
+                <h3 class="text-lg font-semibold">Created</h3>
+                <span *ngIf="module" class="text-sm">{{module.createdAt | date:'d MMM y, h:mm a'}}</span>
+                <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+            </div>
+        </div>
+    </div>
+
+    <app-content-list></app-content-list>
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="font-bold text-3xl">Course Details</h1>
+        <button (click)="openEditDialog()" class="button-primary flex items-center space-x-1.5">
+            <hero-icon name="pencil" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+            <span class="text-sm">Edit Course</span>
+        </button>
+    </div>
+    <div class="w-full max-w-screen-sm mx-auto flex flex-col space-y-4 my-4">
+        <div class="w-full">
+            <img *ngIf="course" [src]="course.thumbnail | img" class="object-cover w-full h-40 rounded-md">
+            <div *ngIf="loading" class="w-full h-40 rounded-md bg-gray-200 animate-pulse"></div>
+        </div>
+        <div class="w-full">
+            <h3 class="text-lg font-semibold">Title</h3>
+            <span *ngIf="course" class="text-sm">{{course.title}}</span>
+            <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+        </div>
+        <div class="w-full">
+            <h3 class="text-lg font-semibold">Created</h3>
+            <span *ngIf="course" class="text-sm">{{course.createdAt | date:'d MMM y, h:mm a'}}</span>
+            <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+        </div>
+        <div class="w-full">
+            <h3 class="text-lg font-semibold">Description</h3>
+            <p *ngIf="course" class="text-justify text-sm">{{course.description}}</p>
+            <div *ngIf="loading" class="w-full h-4 rounded-md bg-gray-200 animate-pulse"></div>
+        </div>
+    </div>
+
+    <app-module-list></app-module-list>
+</div>

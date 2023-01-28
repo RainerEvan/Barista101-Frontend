@@ -1,0 +1,29 @@
+<div class="w-full my-8">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="font-bold text-3xl">Module List</h1>
+        <button (click)="openAddDialog()" class="button-primary flex items-center space-x-1.5">
+            <hero-icon name="plus" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+            <span class="text-sm">Add Module</span>
+        </button>
+    </div>
+    <div class="bg-brown rounded-md p-1 my-4 text-center text-white">{{modules.length}} Modules</div>
+    <ul class="container flex flex-col space-y-4 px-4">
+        <li *ngFor="let module of modules" class="grid grid-cols-8 border rounded-md bg-white shadow-md hover:shadow-lg hover:-translate-y-0.5">
+            <a [routerLink]="['../module/',module.id]" class="col-span-7 flex items-center">
+                <div class="p-4">
+                    <img [src]="module.thumbnail | img" alt="Module Thumbnail" class="object-cover w-28 h-28 rounded-md">
+                </div>
+                <div class="p-2 flex flex-col justify-center">
+                    <span class="font-medium">{{module.title}}</span>
+                    <span class="text-xs">Created {{module.createdAt | date:'d MMM y, h:mm a'}}</span>
+                </div>
+            </a>
+            <button (click)="openDeleteDialog(module.id)" class="z-10 col-span-1 rounded-r-md bg-red-600 p-2 flex items-center justify-center hover:bg-red-500">
+                <hero-icon name="trash" type="solid" class="w-6 h-6 text-white fill-white"></hero-icon>
+            </button>
+        </li>
+        <ng-container *ngFor="let i of [0,1,2,3,4,5]">
+            <div *ngIf="loading" class="w-full h-28 bg-gray-200 rounded-md animate-pulse"></div>
+        </ng-container>
+    </ul>
+</div>

@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="flex flex-row items-center justify-between">
+        <h1 class="font-bold text-3xl">Brew</h1>
+        <button (click)="openAddDialog()" class="button-primary flex items-center space-x-1.5">
+            <hero-icon name="plus" type="solid" class="w-4 h-4 text-white fill-white"></hero-icon>
+            <span class="text-sm">Add Brew</span>
+        </button>
+    </div>
+    <div class="grid grid-cols-2 gap-4 my-4">
+        <li *ngFor="let brew of brews" class="grid grid-cols-5 gap-4 border rounded-md bg-white shadow-md hover:shadow-lg hover:-translate-y-0.5">
+            <a [routerLink]="['./',brew.id]"  class="col-span-4 flex items-center">
+                <div class="p-4">
+                    <img [src]="brew.thumbnail | img" alt="Brew Thumbnail" class="object-cover w-32 h-32 rounded-md bg-orange-100">
+                </div>
+                <div class="flex flex-col justify-center">
+                    <span class="font-medium">{{brew.title}}</span>
+                </div>
+            </a>
+            <button (click)="openDeleteDialog(brew.id)" class="z-10 col-span-1 rounded-r-md bg-red-600 p-2 flex items-center justify-center hover:bg-red-500">
+                <hero-icon name="trash" type="solid" class="w-6 h-6 text-white fill-white"></hero-icon>
+            </button>
+        </li>
+
+        <ng-container *ngFor="let i of [0,1,2,3,4,5]">
+            <div *ngIf="loading" class="w-full h-40 bg-gray-200 rounded-md animate-pulse"></div>
+        </ng-container>
+    </div>
+</div>

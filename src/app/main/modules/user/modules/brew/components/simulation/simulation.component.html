@@ -1,0 +1,54 @@
+<app-back-navigation label="Simulation"></app-back-navigation>
+<div class="container tracking-wide">
+    <div class="flex flex-col items-center space-y-4 p-4">
+        <div class="flex items-center justify-center py-6">
+            <span class="font-roboto text-5xl text-center tracking-wider">{{formatTime(seconds)}}</span>
+        </div>
+
+        <div class="relative w-full aspect-square max-w-sm">
+            <div class="absolute w-full aspect-square flex items-center justify-center px-16 rounded-full bg-orange-100">
+                <div class="z-10 w-full flex flex-col divide-y-2 divide-brown">
+                    <span class="w-full p-2 font-medium text-4xl text-center">{{formatWater(targetWater)}} gr</span>
+                    <span class="w-full p-2 text-2xl text-center">{{formatWater(decigram)}} gr</span>
+                </div>
+            </div>
+            <div class="absolute w-full aspect-square flex items-center justify-center p-10">
+               <div class="w-full aspect-square flex items-center justify-center rounded-full transition-all ease-in-out duration-300" [class]="currStep?.pour ? 'bg-blue-200':'bg-orange-100'">
+               
+                </div>
+            </div>
+            <svg class="absolute -scale-x-100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g class="fill-transparent stroke-transparent">
+                  <circle class="stroke-[4px] stroke-orange-50" cx="50" cy="50" r="45"></circle>
+                  <path
+                    attr.stroke-dasharray="{{formatProgress()}} 283"
+                    class="progress stroke-[4px] rotate-90 origin-center transition-all ease-linear duration-1000 rounded-lg stroke-brown"
+                    d="
+                      M 50, 50
+                      m -45, 0
+                      a 45,45 0 1,0 90,0
+                      a 45,45 0 1,0 -90,0
+                    "
+                  ></path>
+                </g>
+            </svg>
+        </div>
+
+        <div class="w-full max-w-md flex flex-col items-center justify-center space-y-4">
+            <div class="h-14 flex items-center justify-center p-2">
+                <span class="font-medium text-center">{{currStep ? formatDesc(currStep):'Click Play to Start Brewing'}}</span>
+            </div>
+            <div class="inline-flex items-center space-x-8">
+                <!-- <button class="focus:scale-95">
+                    <hero-icon name="rewind" type="solid" class="w-10 h-10 text-brown fill-brown"></hero-icon>
+                </button> -->
+                <button (click)="toggleTimer()" class="active:scale-95">
+                    <hero-icon [name]="isRunning ? 'pause':'play'" type="solid" class="w-20 h-20 text-brown fill-brown"></hero-icon>
+                </button>
+                <!-- <button class="focus:scale-95">
+                    <hero-icon name="fast-forward" type="solid" class="w-10 h-10 text-brown fill-brown"></hero-icon>
+                </button> -->
+            </div>
+        </div>
+    </div>
+</div>
