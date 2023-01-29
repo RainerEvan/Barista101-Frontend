@@ -14,9 +14,6 @@
                     </div>
                 </div>
             </div>
-            <ng-container *ngFor="let i of [0,1,2,3,4,5]">
-                <div *ngIf="loading" class="w-full h-6 bg-gray-200 rounded-md animate-pulse"></div>
-            </ng-container>
         </div>
         <div class="flex items-center space-x-4">
             <button (click)="updatePreparations()" type="button" class="w-full button-primary">Done</button>
