@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl:process.env['API_URL'],
+  apiUrl:process.env.NG_APP_API_URL,
   firebase: {
     apiKey: "AIzaSyAiUPvxIBsajeVZy31uGXJJQ82iTsc2xus",
     authDomain: "barista101-c9d1e.firebaseapp.com",
