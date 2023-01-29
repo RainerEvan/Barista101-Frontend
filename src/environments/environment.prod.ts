@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl:'https://barista101-api.herokuapp.com/api',
+  apiUrl:process.env['API_URL'],
   firebase: {
     apiKey: "AIzaSyAiUPvxIBsajeVZy31uGXJJQ82iTsc2xus",
     authDomain: "barista101-c9d1e.firebaseapp.com",
