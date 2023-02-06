@@ -1,8 +1,8 @@
 <app-back-navigation label="Recipe"></app-back-navigation>
 <div class="container tracking-wide bg-white">
     <div *ngIf="recipe" class="grid grid-cols-1 sm:grid-cols-4 sm:p-4">
-        <div class="col-span-1 w-full shadow-md">
-            <img [src]="recipe.thumbnail | img" alt="Recipe Thumbnail" class="object-cover aspect-square sm:rounded-lg">
+        <div class="col-span-1 w-full shadow-md sm:rounded-lg">
+            <img [src]="recipe.thumbnail | img" alt="Recipe Thumbnail" class="object-cover w-full h-auto sm:rounded-lg">
         </div>
         <div class="col-span-1 relative flex flex-row items-start justify-between space-x-1 p-4 sm:col-span-3">
             <div class="flex flex-col">
