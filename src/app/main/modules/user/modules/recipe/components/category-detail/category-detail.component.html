@@ -4,12 +4,12 @@
         <h1 *ngIf="recipeCategory" class="font-bold text-3xl">{{recipeCategory.name}}</h1>
         <div *ngIf="loading1" class="w-1/2 h-6 bg-gray-200 rounded-xl animate-pulse"></div>
     </div>
-    <div class="grid grid-cols-2 gap-4 my-3 sm:grid-cols-3 md:grid-cols-4">
+    <div *ngIf="recipeCategory" class="grid grid-cols-2 gap-4 my-3 sm:grid-cols-3 md:grid-cols-4">
         <a *ngFor="let recipe of recipes" [routerLink]="['../../detail/',recipe.id]" class="relative aspect-square shadow-md rounded-xl hover:shadow-lg focus:scale-95 before:content-[''] before:absolute before:z-10 before:w-full before:h-full before:bg-gradient-to-t before:from-black/75 before:to-transparent before:rounded-xl">
             <img [src]="recipe.thumbnail | img" alt="Course Thumbnail" class="absolute object-cover w-full h-full rounded-xl">
-            <div class="absolute z-20 w-full h-full flex flex-col justify-end px-2 py-6 text-white">
+            <div class="absolute z-20 w-full h-full flex flex-col justify-end px-3 py-6 text-white">
                 <div class="w-full flex flex-col items-center text-center">
-                    <span class="font-medium tracking-wide">{{recipe.title}}</span>
+                    <span class="max-h-12 font-medium tracking-wide overflow-hidden">{{recipe.title}}</span>
                     <span class="text-xs">{{recipe.author.fullname}}</span>
                 </div>
             </div>
